@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "minify": "terser floater.js -o floater.min.js && csso floater.css -o floater.min.css"
+  },
+  "dependencies": {
+    "csso-cli": "^4.0.2",
+    "terser": "^5.44.1"
+  }
+}
