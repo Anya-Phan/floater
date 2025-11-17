@@ -1,129 +1,254 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-    display: block;
+
+:root {
+    --primary-color: #53629e;
 }
+
+html {
+    font-family: "Poppins", sans-serif;
+    color: #000000;
+    scroll-behavior: smooth;
+}
+
 body {
-    line-height: 1;
+    font-size: 16px;
+    line-height: 1.5;
 }
-ol,
+
+/* Common css */
+a,
+button {
+    border: none;
+    outline: none;
+    color: inherit;
+}
+
 ul {
     list-style: none;
 }
-blockquote,
-q {
-    quotes: none;
+
+code:not([class*="language-"]) {
+    font-style: normal;
+    padding: 2px 5px;
+    border-radius: 4px;
+    background-color: #e8e8e8;
+    font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
 }
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-    content: "";
-    content: none;
+
+textarea,
+table,
+td,
+th,
+code,
+pre,
+samp,
+div,
+p {
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+    -ms-hyphens: auto;
+    -o-hyphens: auto;
 }
+.floater-lib__container {
+    width: 100%;
+    max-width: 1024px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.floater-lib--space-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.floater__backdrop h2 {
+    margin-bottom: 20px;
+}
+/* Header */
+.floater-lib__header {
+    background-color: #ecf4e8;
+    padding: 20px 0;
+}
+
+.floater-lib__logo {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.floater-lib__logo img {
+    width: 60px;
+    height: auto;
+}
+.floater-lib__logo p {
+    color: var(--primary-color);
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.floater-lib__menu {
+    display: flex;
+    gap: 10px;
+}
+.floater-lib__menu-link {
+    display: block;
+    padding: 10px;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.floater-lib__menu-item.active .floater-lib__menu-link {
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.floater-lib__section {
+    margin: 80px 0;
+}
+
+.floater-lib__title {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin: 40px 0;
+}
+
+.floater-lib__subtitle {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 30px 0;
+}
+.floater-lib__text {
+    margin: 20px 0;
+}
+
+.floater-lib__text a {
+    color: var(--primary-color);
+}
+
+.floater-lib__btn {
+    border-radius: 50px;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border: 1px solid var(--primary-color);
+    margin-right: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.floater-lib__blquote {
+    width: max-content;
+    margin: 15px 0;
+    padding: 10px;
+    border-left: 2px solid var(--primary-color);
+    font-style: italic;
+    background-color: #9da8d71f;
+    font-size: 12px;
+}
+
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+    width: 100%;
+}
+
+.floater-lib__table thead {
+    color: #fff;
+    font-weight: 500;
+}
+
+
+.floater-lib__table tr {
+    height: 48px;
+    text-align: left;
+}
+
+.floater-lib__table tr:nth-child(2n){
+background-color: #5a679b0f;
+}
+
+.floater-lib__table tr > * {
+    vertical-align: middle;
+    height: auto;
+    padding: 10px;
+}
+
+.floater-lib__table tr > td:first-child {
+    white-space: nowrap;
+}
+
+.floater-lib__table th {
+    background: var(--primary-color);
+}
+
+.floater__section--params td:nth-child(1) {
+    color: #a613d3;
+}
+.floater__section--params td:nth-child(2) {
+    color: #55a31d;
+}
+
+.floater__section--params td:nth-child(3) {
+    color: #107ce8;
+}
+
+.floater-lib__input {
+    padding: 10px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: 14px;
+    color: inherit;
+    margin-top: 20px;
+    outline: none;
+}
+
+.modal-btn{
+    padding: 15px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    margin-right: 10px;
+    background-color: #021526;
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+}
+
+@media (max-width: 992px) {
+    .floater-lib__nav {
+        display: none;
+    }
+
+    .floater-lib--space-between {
+        justify-content: center;
+    }
+
+    .floater__section--params .floater-lib__table thead {
+        display: none;
+    }
+
+    .floater__section--params .floater-lib__table tr {
+        display: grid;
+        grid-template-columns: auto auto 1fr;
+        grid-template-rows: auto auto;
+        height: auto;
+        margin-top: 10px;
+        border: 1px solid var(--primary-color);
+    }
+
+    .floater__section--params .floater-lib__table td:nth-child(4) {
+        grid-column: 1 / span 3;
+    }
 }

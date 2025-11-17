@@ -12,7 +12,7 @@
     transition-timing-function: ease-in-out;
 }
 
-.floater--show {
+.floater--show.floater__backdrop {
     visibility: visible;
     opacity: 1;
 }
@@ -38,6 +38,7 @@
     font-size: 20px;
     border-radius: 50%;
     background: #ebebeb;
+    cursor: pointer;
 }
 .floater__content {
     max-height: 70vh;

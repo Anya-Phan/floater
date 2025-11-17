@@ -1,14 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Floater.js</title>
+    <title>Floater.js - A library for modals</title>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Favicon -->
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/anya-phan/floater/floater.min.css">
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+
+    <!-- Highlight Code Css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/themes/prism-okaidia.min.css">
+
+    <!-- Floater-->
+    <link rel="stylesheet" href="./floater.css">
+    <script src="./floater.js"></script>
+
+    <!-- Style -->
+    <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-    
-    <script src="https://cdn.jsdelivr.net/gh/anya-phan/floater/floater.min.js"></script>
+    <!-- Header -->
+    <header class="floater-lib__header">
+        <div class="floater-lib__container">
+            <div class="floater-lib--space-between">
+                <div class="floater-lib__logo">
+                    <img src="./assets/icons/Logo.png" alt="">
+                    <p>Floater.js</p>
+                </div>
+                <nav class="floater-lib__nav">
+                    <ul class="floater-lib__menu">
+                        <li class="floater-lib__menu-item active"><a href="#demo"
+                                class="floater-lib__menu-link">Demo</a></li>
+                        <li class="floater-lib__menu-item"><a href="#install" class="floater-lib__menu-link">Install</a>
+                        </li>
+                        <li class="floater-lib__menu-item"><a href="#usage" class="floater-lib__menu-link">Usage</a>
+                        </li>
+                        <li class="floater-lib__menu-item"><a href="#params"
+                                class="floater-lib__menu-link">Parameters</a></li>
+                        <li class="floater-lib__menu-item"><a href="#methods" class="floater-lib__menu-link">Methods</a>
+                        </li>
+                        <li class="floater-lib__menu-item"><a href="#styling" class="floater-lib__menu-link">Styling</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="floater-lib__main">
+        <section id="intro" class="floater-lib__section floater__section--intro">
+            <div class="floater-lib__container">
+                <h2 class="floater-lib__title">🪶Overview</h2>
+                <p class="floater-lib__text">
+                    Floater is a lightweight JavaScript library for creating elegant modal popups.
+                    Easily display dialogs, alerts, or custom content without complex setup. (Source code available on
+                    <a href="">GitHub</a>)
+                </p>
+            </div>
+        </section>
+
+        <section id="demo" class="floater-lib__section floater__section--demo">
+            <div class="floater-lib__container">
+                <h2 class="floater-lib__title">💡Demo</h2>
+                <button class="floater-lib__btn" id="open-modal-1">Classic Modal</button>
+                <button class="floater-lib__btn" id="open-modal-2">Large Content Modal</button>
+                <button class="floater-lib__btn" id="open-modal-3">Remaining Modal</button>
+                <button class="floater-lib__btn" id="open-modal-4">Modal with Buttons</button>
+                <button class="floater-lib__btn" id="open-modal-5">Multiple Modals</button>
+                <button class="floater-lib__btn" id="open-modal-6">Unlocked Scrollbar Modal</button>
+
+            </div>
+        </section>
+
+        <section id="install" class="floater-lib__section floater__section--install">
+            <div class="floater-lib__container">
+                <h2 class="floater-lib__title">Getting Started</h2>
+                <h3 class="floater-lib__subtitle">ZIP</h3>
+                <p class="floater-lib__text">
+                    If you prefer not to use npm or CDN links, you can manually install Floater by downloading the
+                    library files directly. This option is ideal when you want full control over the source files, or if
+                    your project doesn’t
+                    rely on a build system.
+                </p>
+                <p class="floater-lib__text">
+                    Get the most recent version of Floater from the official repository or website:
+                    👉 <a href="https://github.com/Anya-Phan/floater/archive/refs/heads/main.zip"> Download
+                        Floater.zip</a>
+                </p>
+                <p class="floater-lib__text">
+                    After downloading, unzip the archive into your project’s directory.
+                    See a folder structure similar to this:
+                </p>
+                <pre>
+<code class="language-cpp">/your-project/
+├── index.html
+├── js/
+│   └── floater.min.js
+└── css/
+    └── floater.min.css
+</code></pre>
+                <p class="floater-lib__text">
+                    Add the JavaScript and CSS files to your HTML so that the library can be loaded on page load:
+                </p>
+                <pre>
+<code class="language-markup">&lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;./css/floater.min.css&quot;&gt;
+    &lt;script src=&quot;./js/floater.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+</code></pre>
+
+                <h3 class="floater-lib__subtitle">Via CDN</h3>
+                <p class="floater-lib__text">
+                    If you don’t want to download or install anything locally, you can use Floater directly from a CDN.
+                    This is the fastest and easiest way to get started — just copy and paste a few lines into your HTML
+                    file.
+                </p>
+                <p class="floater-lib__text">
+                    Add the stylesheet inside your <code>index.html</code> file:
+                </p>
+                <pre><code class="language-markup">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/anya-phan/floater/floater.min.css&quot;&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/gh/anya-phan/floater/floater.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+            </div>
+        </section>
+
+        <section id="usage" class="floater-lib__section floater__section--usage">
+            <div class="floater-lib__container">
+                <h2 class="floater-lib__title">Initialization</h2>
+                     <p class="floater-lib__text">
+                    This script creates a new instance of Floater and get the value of <code>&lt;content&gt;</code> to make the content for the modal.
+                    When the <code>.open()</code> method is called, show the modal.
+                </p>
+                <pre>
+<code class="language-js">// Initialize a new modal
+const modal = new Floater({
+    content: &apos;&lt;h1&gt;This is content&lt;/h1&gt;&apos;,
+    // template: &apos;modal&apos;,
+    footer: true,
+    destroyOnClose: false,
+    closeMethods: [&apos;overlay&apos;, &apos;button&apos;, &apos;escape&apos;],
+    cssClass: [&apos;class-1&apos;, &apos;class-2&apos;],
+    onOpen: function() {
+        console.log(&apos;Modal opened&apos;);
+    },
+    onClose: function() {
+        console.log(&apos;Modal closed&apos;);
+    },
+});
+
+// Set modal content
+modal.setModalContent(&apos;&lt;h1&gt;This is new content&lt;/h1&gt;&apos;);
+
+// Add footer buttons
+modal.addFooterBtn(&apos;Cancel&apos;, &apos;cancel-btn modal-btn&apos;, function(e) {
+    modal.close();
+});
+
+modal.addFooterBtn(&apos;Submit&apos;, &apos;submit-btn modal-btn&apos;, function(e) {
+    modal.close();
+});
+
+// Open the modal
+modal.open();
+
+// Close the modal
+modal.close(); 
+</code></pre>
+
+                <p class="floater-lib__text">
+                    If you want to get content from an available <code>&lt;template&gt;</code>, don't specify <code>content</code>.
+                    The <code>template</code> contains ID-string of  HTML <code>&lt;template&gt;</code> tag that its content will appear inside the modal
+                    window.
+                    Floater automatically reads and renders this content when <code>.open()</code> is called.
+                </p>
+                <pre>
+<code class="language-markup">&lt;template id=&quot;modal&quot;&gt; 
+  &lt;p&gt;
+    Content Modal: Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    Quibusdam accusamus veritatis ullam quae laudantium.
+  &lt;/p&gt;
+&lt;/template&gt;</code></pre>
+            </div>
+        </section>
+        <section id="params" class="floater-lib__section floater__section--params">
+            <div class="floater-lib__container">
+                <h2 class="floater-lib__title">Parameters</h2>
+                <table class="floater-lib__table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>content</code></td>
+                            <td><code>string</code> | <code>HTMLElement </code></td>
+                            <td></td>
+                            <td>HTML content inside the modal</td>
+                        </tr>
+                        <tr>
+                            <td><code>template</code></td>
+                            <td><code>string</code></td>
+                            <td></td>
+                            <td>ID of template that contains the content of modal. If the <code>content</code> parameter
+                                was specified, <code>template</code> was be ignored</td>
+                        </tr>
+                        <tr>
+                            <td><code>cssClass</code></td>
+                            <td><code>array</code></td>
+                            <td><code>[]</code></td>
+                            <td>
+                                Adding CSS classes to the modal container <br>
+                                Example: <br>
+                                <pre><code class="language-js">cssClass: ['class-1', 'class-2']</code></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>closeMethods</code></td>
+                            <td><code>array</code></td>
+                            <td><code>['button', 'overlay', 'escape']</code></td>
+                            <td>List of modal closing methods</td>
+                        </tr>
+                        <tr>
+                            <td><code>destroyOnClose</code></td>
+                            <td><code>boolean</code></td>
+                            <td><code>true</code></td>
+                            <td>Set to <code>false</code> if you want to remain the modal in DOM when it's closed</td>
+                        </tr>
+                        <tr>
+                            <td><code>lockScroll</code></td>
+                            <td><code>boolean</code></td>
+                            <td><code>true</code></td>
+                            <td>Set to <code>false</code> if you want modal to have footer</td>
+                        </tr>
+                        <tr>
+                            <td><code>footer</code></td>
+                            <td><code>boolean</code></td>
+                            <td><code>false</code></td>
+                            <td>Set to <code>true</code> if you want modal to have footer</td>
+                        </tr>
+
+                        <tr>
+                            <td><code>onOpen</code></td>
+                            <td><code>function</code></td>
+                            <td><code>undefined</code></td>
+                            <td>Callback function executed when the modal opens</td>
+                        </tr>
+                        <tr>
+                            <td><code>onClose</code></td>
+                            <td><code>function</code></td>
+                            <td><code>undefined</code></td>
+                            <td>Callback function executed when the modal closes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="methods" class="floater-lib__section floater__section--methods">
+            <div class="floater-lib__container">
+                <h2 class="floater-lib__title">Methods</h2>
+                <table class="floater-lib__table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>open()</code></td>
+                            <td>Opens the modal and triggers the <code>onOpen</code> callback.</td>
+                        </tr>
+                        <tr>
+                            <td><code>close()</code></td>
+                            <td>Opens the modal and triggers the <code>onOpen</code> callback. If
+                                <code>close(true)</code> is called,
+                                it behaves the same as <code>destroy()</code>, removing the modal from the DOM.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>setModalContent()</code></td>
+                            <td>Updates the modal content.</td>
+                        </tr>
+                        <tr>
+                            <td><code>setFooterContent()</code></td>
+                            <td>Updates the footer content.
+                                <blockquote class="floater-lib__blquote">Only working if parameter
+                                    <code>footer: true</code>
+                                </blockquote>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>addFooterButton()</code></td>
+                            <td>Adds a button to the footer with a callback function.
+                                <blockquote class="floater-lib__blquote">Only working if parameter
+                                    <code>footer: true</code>
+                                </blockquote>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><code>destroy()</code></td>
+                            <td>Completely removes the modal elements from the DOM and unbinds all associated events.
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <section id="styling" class="floater-lib__section floater__section--styling">
+            <div class="floater-lib__container">
+                <h2 class="floater-lib__title">Styling</h2>
+                <p class="floater-lib__text">
+                    Customize Floater modals with your own CSS or override default variables.
+                </p>
+                <pre><code class="language-css">.floater__backdrop {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility, opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+</code></pre>
+                <p class="floater-lib__text">
+                    Customize Floater modals with your own CSS or override default variables.
+                </p>
+                <table class="floater-lib__table">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>.floater__backdrop</code></td>
+                            <td>Styles the backdrop overlay for the modal. Handles positioning, centering the modal, and
+                                applying a semi-transparent background.</td>
+                        </tr>
+                        <tr>
+                            <td><code>.floater__container</code></td>
+                            <td>Styles the modal container, including its size, padding, border-radius, and transform
+                                animations for scaling in/out.</td>
+                        </tr>
+                        <tr>
+                            <td><code>.floater__close</code></td>
+                            <td>Styles the close button inside the modal, including its size, position, and hover
+                                effects.</td>
+                        </tr>
+                        <tr>
+                            <td><code>.floater__content</code></td>
+                            <td>Handles the modal's main content area, including scrollable behavior with a maximum
+                                height.</td>
+                        </tr>
+                        <tr>
+                            <td><code>.floater__footer</code></td>
+                            <td>Styles the modal footer, aligning buttons to the right and adding spacing between them.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>.floater--show</code></td>
+                            <td>Applied when the modal is visible. Controls the visibility and opacity of the backdrop.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>.floater--no-scroll</code></td>
+                            <td>Disables scrolling when the modal is open.</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <p class="floater-lib__text">
+                    You can view the full CSS file directly here: <a href="">floater.css</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="floater-lib__footer">
+        <div class="floater-lib__container">
+            <p class="floater-lib__copyright">
+                © 2025 Floater.js — Lightweight Modal Library
+            </p>
+        </div>
+    </footer>
+
+    <template id="modal-1">
+        <h2>Classic Modal</h2>
+        <p>This is a classic modal</p>
+    </template>
+    <template id="modal-2">
+        <h2>Large Content Modal</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima voluptates laborum qui at exercitationem
+            dicta rerum similique? Nobis sequi doloribus excepturi illum quibusdam explicabo a. Labore ratione id
+            deserunt corporis!
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque molestiae quasi quod modi quis
+            temporibus provident at, explicabo consequatur facilis maxime nam asperiores, voluptatem error vitae qui
+            quisquam, tenetur iusto assumenda laudantium illum. Nisi ipsum asperiores totam nostrum voluptatem?
+            Reprehenderit minima placeat libero aliquam consequatur incidunt alias iusto accusamus? Nostrum quasi,
+            debitis blanditiis dolorem ipsum aperiam suscipit quam rerum veritatis repudiandae animi delectus natus! Nam
+            excepturi animi sint rerum praesentium perferendis dolore, quis laudantium rem necessitatibus quisquam non
+            quia magni nemo a temporibus ipsum aliquid dolorum eius, magnam ipsa officiis amet! Vero, sit. At aperiam
+            excepturi earum sunt unde voluptas.
+        </p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima voluptates laborum qui at exercitationem
+            dicta rerum similique? Nobis sequi doloribus excepturi illum quibusdam explicabo a. Labore ratione id
+            deserunt corporis!
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque molestiae quasi quod modi quis
+            temporibus provident at, explicabo consequatur facilis maxime nam asperiores, voluptatem error vitae qui
+            quisquam, tenetur iusto assumenda laudantium illum. Nisi ipsum asperiores totam nostrum voluptatem?
+            Reprehenderit minima placeat libero aliquam consequatur incidunt alias iusto accusamus? Nostrum quasi,
+            debitis blanditiis dolorem ipsum aperiam suscipit quam rerum veritatis repudiandae animi delectus natus! Nam
+            excepturi animi sint rerum praesentium perferendis dolore, quis laudantium rem necessitatibus quisquam non
+            quia magni nemo a temporibus ipsum aliquid dolorum eius, magnam ipsa officiis amet! Vero, sit. At aperiam
+            excepturi earum sunt unde voluptas.
+        </p>
+    </template>
+    <template id="modal-3">
+        <h2>Remaining Modal</h2>
+        <p>Modal stays in DOM instead of being removed from DOM by default. Try typing something into the input below
+        </p>
+        <input type="text" placeholder="Type something..." class="floater-lib__input">
+    </template>
+    <template id="modal-4">
+        <h2>Modal with Buttons</h2>
+        <p>Close Modal with Cancel and Submit Button</p>
+    </template>
+    <template id="modal-5">
+        <h2>Multiple Modals</h2>
+        <p>Click the button below to open Classic Modal</p>
+        <button class="floater-lib__btn" onclick="modal1.open()">Open Classic Modal</button>
+    </template>
+    <template id="modal-6">
+        <h2>Unlocked Scrollbar Modal</h2>
+        <p>Try scrolling. The scrollbar of browser is unlocked</p>
+    </template>
+
+    <!-- Highlight Code JS -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+    <!-- Script.js -->
+    <script src="./script.js"></script>
 </body>
+
 </html>

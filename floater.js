@@ -3,26 +3,51 @@
 Floater.elements = [];
 
 function Floater(options = {}) {
-    this._template = document.querySelector(`#${options.template}`);
+    if (!options.template && !options.content) {
+        console.error("No template or content has existed");
+        return;
+    }
+
+    if (options.template && options.content) {
+        options.template = null;
+        console.warn(
+            "Both 'content' and 'template' specified, 'content' will be ignored"
+        );
+    }
+
+    if (options.template) {
+        this._template = document.querySelector(`#${options.template}`);
+        if (!this._template) {
+            console.error("No template has existed");
+            return;
+        }
+    }
     this.opt = Object.assign(
         {
+            content: "",
             closeMethods: ["button", "overlay", "escape"],
             destroyOnClose: true,
-            footer: true,
+            footer: false,
             cssClass: [],
+            lockScroll: true,
         },
         options
     );
-
-    if (!this._template) {
-        console.error("No template has existed");
-    }
+    this._content = this.opt.content;
     this._allowButtonClose = this.opt.closeMethods.includes("button");
     this._allowBackdropClose = this.opt.closeMethods.includes("overlay");
     this._allowEscapeClose = this.opt.closeMethods.includes("escape");
     this._footerButtons = [];
     this._escape = this._escape.bind(this);
 }
+Floater.prototype._hasScrollBar = function () {
+    return (
+        document.documentElement.scrollHeight >
+            document.documentElement.clientHeight ||
+        document.body.scrollHeight > document.body.clientHeight
+    );
+};
+
 Floater.prototype._getScrollbarWidth = function () {
     if (this._scrollbarWidth) return this._scrollbarWidth;
 
@@ -54,7 +79,12 @@ Floater.prototype._escape = function (e) {
 
 // Build Modal Element
 Floater.prototype._build = function () {
-    const content = this._template.content.cloneNode(true);
+    const contentNode = this._content
+        ? document.createElement("div")
+        : this._template.content.cloneNode(true);
+    if (this._content) {
+        contentNode.innerHTML = this._content;
+    }
 
     this._backdrop = document.createElement("div");
     this._backdrop.className = "floater__backdrop";
@@ -62,8 +92,8 @@ Floater.prototype._build = function () {
     const container = document.createElement("div");
     container.className = "floater__container";
 
-    const modalContent = document.createElement("div");
-    modalContent.className = "floater__content";
+    this._modalContent = document.createElement("div");
+    this._modalContent.className = "floater__content";
 
     if (this.opt.cssClass.length) {
         this.opt.cssClass.forEach((elem) => {
@@ -74,7 +104,7 @@ Floater.prototype._build = function () {
     }
 
     // Append content and elems
-    modalContent.append(content);
+    this._modalContent.append(contentNode);
     if (this._allowButtonClose) {
         // If we have close button
         const close = this._createButton("&times;", "floater__close", () => {
@@ -82,7 +112,7 @@ Floater.prototype._build = function () {
         });
         container.append(close);
     }
-    container.append(modalContent);
+    container.append(this._modalContent);
     if (this.opt.footer) {
         this._modalFooter = document.createElement("div");
         this._modalFooter.className = "floater__footer";
@@ -99,6 +129,14 @@ Floater.prototype._build = function () {
 
     this._backdrop.append(container);
     document.body.append(this._backdrop);
+};
+
+// Set modal content
+Floater.prototype.setModalContent = function (html) {
+    this._content = html;
+    if (this._modalContent) {
+        this._modalContent.innerHTML = this._content;
+    }
 };
 
 // set Footer
@@ -148,7 +186,7 @@ Floater.prototype.open = function () {
     }
     setTimeout(() => {
         this._backdrop.classList.add("floater--show");
-    }, 10);
+    });
 
     // if we have overlay
     if (this._allowBackdropClose) {
@@ -164,8 +202,10 @@ Floater.prototype.open = function () {
         document.addEventListener("keydown", this._escape);
     }
 
-    document.body.classList.add("floater--no-scroll");
-    document.body.style.paddingRight = this._getScrollbarWidth() + "px";
+    if (this.opt.lockScroll) {
+        document.body.classList.add("floater--no-scroll");
+        document.body.style.paddingRight = this._getScrollbarWidth() + "px";
+    }
 
     // Callback when open modal
     if (typeof this.opt.onOpen === "function") this.opt.onOpen();
@@ -178,8 +218,9 @@ Floater.prototype.open = function () {
 // CLose Modal
 Floater.prototype.close = function (destroy = this.opt.destroyOnClose) {
     Floater.elements.pop();
-    console.log(this);
-    this._backdrop.classList.remove("floater--show");
+    setTimeout(() => {
+        this._backdrop.classList.remove("floater--show");
+    });
     if (!Floater.elements.length) {
         document.body.classList.remove("floater--no-scroll");
         document.body.style.paddingRight = "";
@@ -198,4 +239,3 @@ Floater.prototype.close = function (destroy = this.opt.destroyOnClose) {
 Floater.prototype.destroy = function () {
     this.close(true);
 };
-
